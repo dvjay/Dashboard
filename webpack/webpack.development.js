@@ -1,27 +1,27 @@
 /* eslint-disable */
-const path = require('path');
-const webpack = require('webpack');
+const resolve = require("./webpack.resolve");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
-const ENV = "development";
-
-module.exports = () => ({
+module.exports = (context) => ({
   entry: ['./src/index'],
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: context.outputDirPath,
+    publicPath: "/",
     filename: 'bundle.js',
   },
   devServer: {
-    contentBase: "./dist",
+    compress: true,
+    port: 9001,
     open: true,
-    writeToDisk: true,
+    writeToDisk: false,
     progress: true,
-    publicPath: "/",
     historyApiFallback: true,
     hot: true,
     inline: true
   },
+  resolve,
   module: {
     rules: [
       {
@@ -29,12 +29,25 @@ module.exports = () => ({
         test: /\.tsx?$/,
         use: 'babel-loader',
       },
+      {
+        test: /\.s(a|c)ss$/,
+        loader: [
+          'style-loader', 'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true
+            }
+          }
+        ]
+      }
     ],
   },
   plugins: [new HtmlWebpackPlugin(),
-            new CleanWebpackPlugin(),
-            new webpack.DefinePlugin({
-              "process.env.NODE_ENV": JSON.stringify(ENV)
-            })
+            new MiniCssExtractPlugin({
+              filename: '[name].css',
+              chunkFilename: '[id].css'
+            }),
+            new CleanWebpackPlugin()
           ],
 });

@@ -1,15 +1,16 @@
-const webpack = require("webpack");
+const path = require("path");
 const webpackMerge = require("webpack-merge");
-const resolve = require("./webpack.resolve");
 
-const modeConfig = env => require(`./webpack.${env}`)(env);
+const env = process.env.NODE_ENV;
+const rootDirPath = path.resolve(__dirname, "../");
+const outputDirPath = path.join(rootDirPath, "dist");
+const modeConfig = context => require(`./webpack.${context.env}`)(context);
 
 module.exports = () => {
   return webpackMerge(
     {
-      mode: process.env.NODE_ENV,
-      resolve
+      mode: process.env.NODE_ENV
     },
-    modeConfig(process.env.NODE_ENV)
+    modeConfig({env, rootDirPath, outputDirPath})
   )
 };
