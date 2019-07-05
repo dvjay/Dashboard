@@ -15,7 +15,7 @@ module.exports = (context) => ({
     compress: true,
     port: 9001,
     open: true,
-    writeToDisk: false,
+    writeToDisk: true,
     progress: true,
     historyApiFallback: true,
     hot: true,
