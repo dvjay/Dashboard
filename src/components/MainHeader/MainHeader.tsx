@@ -2,12 +2,15 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { ExpandCollapseMenuButton } from './ExpandCollapseMenuButton';
 
+export interface IMainHeaderProps {
+  opeSideNav(isOpen: boolean): void;
+}
 export interface IMainHeaderState {
   menuOpen: boolean;
 }
 
-export class MainHeader extends React.Component<{}, IMainHeaderState> {
-  constructor(props: {}) {
+export class MainHeader extends React.Component<IMainHeaderProps, IMainHeaderState> {
+  constructor(props: IMainHeaderProps) {
     super(props);
 
     this.state = {
@@ -16,7 +19,9 @@ export class MainHeader extends React.Component<{}, IMainHeaderState> {
   }
     
   handleMenuClick() {
-    this.setState({menuOpen:!this.state.menuOpen});
+    const menuOpened = !this.state.menuOpen;
+    this.props.opeSideNav(menuOpened);
+    this.setState({menuOpen: menuOpened});
   }
   
   render() {
