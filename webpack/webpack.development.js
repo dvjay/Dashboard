@@ -30,12 +30,19 @@ module.exports = (context) => ({
         use: 'babel-loader',
       },
       {
-        test: /\.s(a|c)ss$/,
+        test: /\.(css)$/,
         loader: [
-          'style-loader', 'css-loader',
+          'style-loader',
           {
-            loader: 'sass-loader',
+            loader: 'css-loader',
             options: {
+              sourceMap: true
+            }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: () => [require('autoprefixer')],
               sourceMap: true
             }
           }
