@@ -16,7 +16,7 @@ const sideNavOpenGTC = "1fr 1fr 1fr 1fr";
 const sideNavCloseGTC = "0fr 0fr 0fr 4fr";
 const AppSection = styled.section`
 	display: grid;
-	grid-template-rows: 70px 70px auto 70px;
+	grid-template-rows: 100px 100px auto 100px;
 	grid-template-columns: ${sideNavCloseGTC};
 	grid-template-areas: ${sideNavOpenGTA};
 	height: 100vh;
