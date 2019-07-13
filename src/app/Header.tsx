@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { TweenMax } from 'gsap';
 import styled, {AnyStyledComponent} from 'styled-components';
 import ToggleMenu from './Header/ToggleMenu';
-import { sideNavCloseGTC, sideNavOpenGTC } from 'src/global-styled/app';
+import { TransitionGroup } from 'react-transition-group';
 
 export interface IHeaderProps {
   appSectionElem: React.RefObject<AnyStyledComponent>;
@@ -20,15 +19,8 @@ export class Header extends React.Component<IHeaderProps, IHeaderState> {
     };
   }
 
-  handleMenuClick() {
-    const menuOpened = !this.state.menuOpen;
-    this.setState({menuOpen: menuOpened}, () => {
-      TweenMax.to(this.props.appSectionElem.current as any,
-        0.2, {
-        gridTemplateColumns: this.state.menuOpen? sideNavOpenGTC : sideNavCloseGTC
-        }
-      );
-    });
+  handleMenuClick = () => {
+    this.setState({menuOpen: !this.state.menuOpen});
   }
   
   render() {
@@ -47,10 +39,12 @@ export class Header extends React.Component<IHeaderProps, IHeaderState> {
     
     return(
       <HeaderUl>
-        <li><ToggleMenu toggle={this.state.menuOpen} 
-                        onClick={()=>this.handleMenuClick()} 
-                        iconA={"ChromeBack"} 
-                        iconB={"CollapseMenu"}/>
+        <li>
+          <TransitionGroup component={null} >
+            <ToggleMenu toggle={this.state.menuOpen} 
+                        onClick={this.handleMenuClick} 
+                        appSectionElem={this.props.appSectionElem}/>
+          </TransitionGroup>
         </li>
         <li>
           <div>Logo</div>
