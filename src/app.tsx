@@ -17,7 +17,6 @@ const App = () => {
 				<AppHeader>
 					<Header appSectionElem={appSectionElem}/>
 				</AppHeader>
-				<AppTabs>Tabs</AppTabs>
 				<AppMain>Editor</AppMain>
 				<AppSideNav>
 					<div>

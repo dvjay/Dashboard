@@ -1,9 +1,8 @@
 import styled, {AnyStyledComponent} from 'styled-components';
 
 export const sideNavOpenGTA = `"header header header header"
-						"tabs tabs tabs tabs"
-						"main main main main"
-                        "footer footer footer footer"`;	
+								"main main main main"
+								"footer footer footer footer"`;	
                         
 export const sideNavOpenGTC = "1fr 1fr 1fr 1fr";
 
@@ -11,7 +10,7 @@ export const sideNavCloseGTC = "0fr 0fr 0fr 4fr";
 
 export const AppSection: AnyStyledComponent = styled.section`
 	display: grid;
-	grid-template-rows: 100px 100px auto 100px;
+	grid-template-rows: 100px auto 100px;
 	grid-template-columns: ${sideNavCloseGTC};
 	grid-template-areas: ${sideNavOpenGTA};
 	height: 100vh;
@@ -31,11 +30,6 @@ export const AppSideNav = styled.nav`
 	height: 100%;
 	min-width: 200px;
 	place-self: flex-end;
-`;
-
-export const AppTabs = styled.section`
-	grid-area: tabs;
-	background-color: orange;
 `;
 
 export const AppMain = styled.main`
