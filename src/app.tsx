@@ -1,31 +1,35 @@
 import * as React from 'react';
 import { hot } from 'react-hot-loader';
-import { Header } from './app/Header';
-import {sideNavOpenGTC, sideNavCloseGTC, AppSection, AppHeader, AppTabs, AppMain, AppSideNav, AppFooter} from './global-styled/app';
+import {AppSection} from './global-styled/app';
 import './style.css';
-import { TweenMax } from 'gsap';
 import {AnyStyledComponent} from 'styled-components';
 import { initializeIcons } from '@uifabric/icons';
-//import { loadTheme } from 'office-ui-fabric-react';
+import SelectLayout from './components/SelectLayout';
+import AppMobile from './app-mobile';
+import AppDesktop from './app-desktop';
+import {DeviceViewTypeProvider} from './components/DeviceViewTypeContext';
+import {SidebarToggleProvider} from './components/SidebarToggleContext';
 initializeIcons();
-
 
 const App = () => {
 	const appSectionElem: React.RefObject<AnyStyledComponent> = React.createRef<AnyStyledComponent>();
 
-	return (<AppSection ref={appSectionElem}>
-				<AppHeader>
-					<Header appSectionElem={appSectionElem}/>
-				</AppHeader>
-				<AppMain>Editor</AppMain>
-				<AppSideNav>
-					<div>
-						I am a floated element.
-					</div>
-				</AppSideNav>
-				<AppFooter>Footer</AppFooter>
-  			</AppSection>);
+	return (
+		<DeviceViewTypeProvider>
+			<AppSection ref={appSectionElem}>
+				<SidebarToggleProvider appSectionRef={appSectionElem}>
+					<SelectLayout
+						renderDesktop={() => (
+							<AppDesktop />
+						)}
+						renderMobile={() => (
+							<AppMobile/>
+						)}
+						/>
+				</SidebarToggleProvider>
+			</AppSection>
+		</DeviceViewTypeProvider>
+	)
 };
-	
 
 export default hot(module)(App);
