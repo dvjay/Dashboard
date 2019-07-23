@@ -2,19 +2,25 @@ import React, { createContext, useState, useEffect, ReactNode, useContext } from
 import { IResponsiveSize, DeviceViews, IResponsiveInfo } from '../../interfaces/IResponsiveSize';
 
 //const { Provider, Consumer } = createContext<IResponsiveInfo | null>(null);
-const DeviceViewTypeContext = createContext<IResponsiveInfo | null>(null);
-
 const mobileWidth = 700;
 
 const windowDims = (initHeight: number, initWidth: number): IResponsiveSize => ({
   height: initHeight,
   width: initWidth,
   deviceView: initWidth <= mobileWidth? DeviceViews.Mobile : DeviceViews.Desktop
-})
+});
+
+const initWindowDims = windowDims(window.innerHeight, window.innerWidth);
+console.log("Digvijay Checking");
+console.log(initWindowDims);
+
+const DeviceViewTypeContext = createContext<IResponsiveInfo>({
+  startupSize: initWindowDims,
+  currentSize: initWindowDims
+  });
 
 const DeviceViewTypeProvider: React.FunctionComponent<ReactNode> = ({ children }) => {
-  const [initDimensions] = useState<IResponsiveSize>(windowDims(window.innerHeight, window.innerWidth));
-  const [currentDimensions, setCurrentDimensions] = useState<IResponsiveSize>(windowDims(window.innerHeight, window.innerWidth));
+  const [currentDimensions, setCurrentDimensions] = useState<IResponsiveSize>(initWindowDims);
 
   useEffect(() => {
     const handleResize = () => {
@@ -24,7 +30,7 @@ const DeviceViewTypeProvider: React.FunctionComponent<ReactNode> = ({ children }
     return () => { window.removeEventListener('resize', handleResize) }
   }, [])
   return (
-    <DeviceViewTypeContext.Provider value={{startupSize: initDimensions, currentSize: currentDimensions}}>
+    <DeviceViewTypeContext.Provider value={{startupSize: initWindowDims, currentSize: currentDimensions}}>
       {children}
     </DeviceViewTypeContext.Provider>
   )

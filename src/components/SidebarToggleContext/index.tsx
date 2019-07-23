@@ -2,7 +2,7 @@ import React, { createContext, ReactNode } from 'react';
 import ISidebarToggle from '../../interfaces/ISidebarToggle';
 import {AnyStyledComponent} from 'styled-components';
 import { TweenMax } from 'gsap';
-import { sideNavCloseGTC, sideNavOpenGTC } from 'src/global-styled/app';
+import { sideNavCloseGTC_Mobile, sideNavOpenGTC_Mobile } from 'src/global-styled/app';
 
 const { Provider, Consumer } = createContext<ISidebarToggle>({isExpanded: false, 
                                                                 setIsExpanded: () => {console.log("SidebarToggleHandler default value")},
@@ -28,8 +28,8 @@ class SidebarToggleProvider extends React.Component<ISidebarInfoProps, ISidebarI
 
   sidebarToggle = (toggle: boolean, appSectionElem: React.RefObject<AnyStyledComponent>) => {
     TweenMax.to(appSectionElem.current as any,
-      0.2, {
-      gridTemplateColumns: toggle?  sideNavOpenGTC : sideNavCloseGTC
+      .2, {
+      gridTemplateColumns: toggle?  sideNavOpenGTC_Mobile : sideNavCloseGTC_Mobile
       }
     );
   }
