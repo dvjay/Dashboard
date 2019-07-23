@@ -11,7 +11,7 @@ const AppMobile = () => {
 				<AppMain>Editor</AppMain>
 				<AppSideNav>
 					<div>
-						I am a floated element.
+						I am a floated element in Mobile.
 					</div>
 				</AppSideNav>
 				<AppFooter>Footer</AppFooter>

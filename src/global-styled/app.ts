@@ -22,8 +22,20 @@ export const AppSection: AnyStyledComponent = styled.section`
 export const AppHeader = styled.header`
 	grid-area: header;
 `;
+export const AppMobHeader = styled.header`
+	grid-area: header;
+`;
 
 export const AppSideNav = styled.nav`
+	grid-area: 2 /1 / span 2/ span 3;
+	background-color: green;
+	width: 100%;
+	height: 100%;
+	min-width: 200px;
+	place-self: flex-end;
+`;
+
+export const AppMobSideNav = styled.nav`
 	grid-area: 2 /1 / span 2/ span 3;
 	background-color: green;
 	width: 100%;
@@ -37,7 +49,17 @@ export const AppMain = styled.main`
 	background-color: blue;
 `;
 
+export const AppMobMain = styled.main`
+	grid-area: main;
+	background-color: blue;
+`;
+
 export const AppFooter = styled.footer`
+	grid-area: footer;
+	background-color: gray;
+`;
+
+export const AppMobFooter = styled.footer`
 	grid-area: footer;
 	background-color: gray;
 `;
