@@ -1,24 +1,27 @@
 import * as React from 'react';
 import { hot } from 'react-hot-loader';
-import {sideNavCloseGTC_Mobile, sideNavCloseGTC_Desktop, sideNavOpenGTA} from './global-styled/app';
+// import {sideNavCloseGTR_Mobile, sideNavCloseGTR_Desktop, sideNavOpenGTA} from './global-styled/app';
 import './style.css';
 import styled, {AnyStyledComponent} from 'styled-components';
 import { initializeIcons } from '@uifabric/icons';
 import SelectLayout from './components/SelectLayout';
 import AppMobile from './app-mobile';
-import AppDesktop from './app-desktop';
+//import AppDesktop from './app-desktop';
 import {DeviceViewTypeProvider, DeviceViewTypeConsumer} from './components/DeviceViewTypeContext';
-import {SidebarToggleProvider} from './components/SidebarToggleContext';
+// import {SidebarToggleProvider} from './components/SidebarToggleContext';
 import { DeviceViews, IResponsiveInfo} from './interfaces/IResponsiveSize';
 initializeIcons();
 
-const App = () => {
-	const appSectionElem: React.RefObject<AnyStyledComponent> = React.createRef<AnyStyledComponent>();
+const sideNavOpenGTA = `"header"
+						"main"
+						"footer"`;
+const sideNavOpenGTR_Desktop = "100px auto 100px";
+const sideNavOpenGTR_Mobile = "100px auto 100px";
 
-	const AppSection: AnyStyledComponent = styled.section<IResponsiveInfo>`
+const AppSection: AnyStyledComponent = styled.section<IResponsiveInfo>`
 		display: grid;
-		grid-template-rows: 100px auto 100px;
-		grid-template-columns: ${ props => props.startupSize.deviceView === DeviceViews.Mobile ? sideNavCloseGTC_Mobile : sideNavCloseGTC_Desktop};
+		/* grid-template-rows: 100px auto 100px; */
+		grid-template-rows: ${ props => props.startupSize.deviceView === DeviceViews.Mobile ? sideNavOpenGTR_Mobile : sideNavOpenGTR_Desktop};
 		grid-template-areas: ${sideNavOpenGTA};
 		height: 100vh;
 		width: 100vw;
@@ -26,21 +29,20 @@ const App = () => {
 		overflow: hidden;
 	`;
 
+const App = () => {
+	//const appSectionElem: React.RefObject<AnyStyledComponent> = React.createRef<AnyStyledComponent>();
+
 	return (
 		<DeviceViewTypeProvider>
 			<DeviceViewTypeConsumer>
 			{(context) => (
-				<AppSection ref={appSectionElem} startupSize={context.startupSize}>
-					<SidebarToggleProvider appSectionRef={appSectionElem} >
-						<SelectLayout
-							renderDesktop={() => (
-								<AppDesktop />
-							)}
-							renderMobile={() => (
-								<AppMobile/>
-							)}
-							/>
-					</SidebarToggleProvider>
+				<AppSection startupSize={context.startupSize}>
+						<SelectLayout renderDesktop={() => (
+										<AppMobile />
+									)}
+									renderMobile={() => (
+										<AppMobile/>
+									)}/>
 				</AppSection>)}
 			</DeviceViewTypeConsumer>
 		</DeviceViewTypeProvider>
