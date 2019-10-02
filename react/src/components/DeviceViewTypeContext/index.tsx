@@ -37,8 +37,8 @@ const DeviceViewTypeProvider: React.FunctionComponent<ReactNode> = ({ children }
 }
 
 const DeviceViewTypeConsumer = DeviceViewTypeContext.Consumer;
-const useDeviceViewTypeContext = () => {
+const deviceViewTypeContext = () => {
   return useContext(DeviceViewTypeContext)
 }
 
-export {DeviceViewTypeProvider, DeviceViewTypeConsumer, useDeviceViewTypeContext};
+export {DeviceViewTypeProvider, DeviceViewTypeConsumer, DeviceViewTypeContext};

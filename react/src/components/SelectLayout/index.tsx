@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useDeviceViewTypeContext } from '../DeviceViewTypeContext';
+import { DeviceTypeContext } from '../DeviceViewTypeContext';
 import { DeviceViews, IResponsiveInfo} from '../../interfaces/IResponsiveSize';
 
 const SelectLayout: React.FunctionComponent<any> = ({ renderMobile, renderDesktop }) => {

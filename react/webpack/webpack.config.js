@@ -9,7 +9,10 @@ const modeConfig = context => require(`./webpack.${context.env}`)(context);
 module.exports = () => {
   return webpackMerge(
     {
-      mode: process.env.NODE_ENV
+      mode: process.env.NODE_ENV,
+      externals: {
+        'Config': JSON.stringify(require('../config/config.common.json'))
+      }
     },
     modeConfig({env, rootDirPath, outputDirPath})
   )

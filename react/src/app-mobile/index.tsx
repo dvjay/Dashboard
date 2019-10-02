@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Header } from './Header';
 import styled from 'styled-components';
+import Main from "./Main";
+import {SidebarToggleProvider} from "../components/SidebarToggleContext";
 
 const AppHeader = styled.header`
 	grid-area: header;
@@ -9,6 +11,7 @@ const AppHeader = styled.header`
 const AppMain = styled.main`
 	grid-area: main;
 	background-color: blue;
+	position: relative;
 `;
 
 const AppFooter = styled.footer`
@@ -17,13 +20,15 @@ const AppFooter = styled.footer`
 `;
 
 const AppMobile = () => {
-	return (<>	
-		<AppHeader>
-			<Header/>
-		</AppHeader>
-		<AppMain>Editor</AppMain>
-		<AppFooter>Footer</AppFooter>
-	</>);
+	return (<SidebarToggleProvider>
+				<AppHeader>
+					<Header/>
+				</AppHeader>
+				<AppMain>
+					<Main></Main>
+				</AppMain>
+				<AppFooter>Footer</AppFooter>
+			</SidebarToggleProvider>);
 };
 	
 
